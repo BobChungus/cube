@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>cube</title>
+	<style>
+        body {
+            cursor: none;
+            
+			height: 100vh;
+			margin: 0;
+			padding: 0;
+			transition: background-color 0.1s ease-in;transition: background-color 0.1s ease-in;
+		}
+
+		@keyframes rainbow {
+			0% {
+				background-position: 0% 50%;
+			}
+			50% {
+				background-position: 100% 50%;
+			}
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+        
+		.container {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			perspective: 1000px;
+		}
+		
+		.cube {
+            cursor: none;
+            
+			position: relative;
+			width: 200px;
+			height: 200px;
+			transform-style: preserve-3d;
+			animation: rotate 5s infinite linear;
+		}
+		
+		.cube-face {
+			position: absolute;
+			width: 200px;
+			height: 200px;
+			opacity: 1;
+			transition: background-color 0.1s ease-in-out;
+		}
+		
+		.front {
+			transform: translateZ(100px);
+			background-color: blue;
+		}
+		
+		.back {
+			transform: translateZ(-100px) rotateY(180deg);
+			background-color: red;
+		}
+		
+		.right {
+			transform: rotateY(90deg) translateZ(100px);
+			background-color: green;
+		}
+		
+		.left {
+			transform: rotateY(-90deg) translateZ(100px);
+			background-color: yellow;
+		}
+		
+		.top {
+			transform: rotateX(-90deg) translateZ(100px);
+			background-color: purple;
+		}
+		
+		.bottom {
+			transform: rotateX(90deg) translateZ(100px);
+			background-color: orange;
+		}
+		
+		@keyframes rotate {
+			0% { transform: rotateX(0) rotateY(0) rotateZ(0); }
+			100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+		}
+	</style>
+	<script>
+		var colors = ['blue', 'red', 'green', 'yellow', 'purple', 'orange'];
+		var faces = document.getElementsByClassName('cube-face');
+		setInterval(function() {
+			for (var i = 0; i < faces.length; i++) {
+				var colorIndex = Math.floor(Math.random() * colors.length);
+				faces[i].style.backgroundColor = colors[colorIndex];
+			}
+		}, 100);
+	</script>
+</head>
+<body>
+    <script>
+		setInterval(changeColor, 200);
+
+		function changeColor() {
+			let red = Math.floor(Math.random() * 256);
+			let green = Math.floor(Math.random() * 256);
+			let blue = Math.floor(Math.random() * 256);
+			let color = "rgb(" + red + ", " + green + ", " + blue + ")";
+			document.body.style.backgroundColor = color;
+		}
+	</script>
+    
+	<div class="container">
+		<div class="cube">
+			<div class="cube-face front"></div>
+			<div class="cube-face back"></div>
+			<div class="cube-face right"></div>
+			<div class="cube-face left"></div>
+			<div class="cube-face top"></div>
+			<div class="cube-face bottom"></div>
+		</div>
+	</div>
+</body>
+</html>
